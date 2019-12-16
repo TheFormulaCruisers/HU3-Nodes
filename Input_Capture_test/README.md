@@ -49,6 +49,6 @@ Because we can monitor the value of our input pulse we can adjust to just below 
 
 ## Acknowledgement
  Docent : DHr Jesse op den Bouw  
-(1) https://www.electronicwings.com/avr-atmega/atmega1632-timer-input-capture-mode
+(1) https://www.electronicwings.com/avr-atmega/atmega1632-timer-input-capture-mode  
 (2) http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7647-Automotive-Microcontrollers-ATmega16M1-32M1-64M1-32C1-64C1_datasheet.pdf
 
