@@ -1,5 +1,5 @@
 # ADC(Analog to Digital Converter)
-
+ analog-to-digital converter is a system that converts an analog signal, into a digital signal. 
 
 
 ## Getting Started
@@ -39,7 +39,7 @@ The ADC Data Register – ADCL and ADCH : The final result of conversion is here
 ## Running the tests
 
 In order to monitor if the code is converting the Analog signal into Digital signal we add a condition to the LED’s. 
-Because we have but 4 LED's we've taken the maximum Digital value and divided it by 4.
+Because we have but 4 LED's we've taken the maximum Digital value(0 - 255) and divided it by 4.
 If the analog signal is below a quarter of the reference voltage, led1 would turn on.
 If the analog signal surpasses a quarter but below half of the reference voltage, led1 and led2 would turn on.
 and so on.
