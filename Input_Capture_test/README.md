@@ -29,6 +29,9 @@ Because we are using pin PD4(ICP1A) which is also used for the SPI communication
 
 ## Running the tests
 
+Initialize the TCCR1A and TCCR1B for proper timer mode (any mode other than 8, 10, 12, 14), to select the edge (Positive or Negative).
+Monitor the ICF1A flag in TIFR register to see if edge is arrived. Upon the arrival of the edge, the TCNT1 value is loaded in to ICR1 register automatically by controller.  
+
 Prescalar : we are using a 16MHz  microchip, the timer counter used is  16 bit long. Meaning the clock makes 2^16 = 65536 ticks before overflowing. 16 MHz = 6.25^-8 seconds per tick.
 Thus if we set the prescalar to 1, it  takes 65536 * 6.25^-8 = 0.004096 seconds per overflow = 4096 microseconds. Which is more than enough to conduct our tests. Making sure our input pulse does not exceed the amount of time per overflow we can safely test our input capture without the complications with the timer, such as the second edge detection having a smaller value than the first one.
 
