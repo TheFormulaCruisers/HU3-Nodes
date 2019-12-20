@@ -18,14 +18,14 @@ In this particular test we’re merely measuring the  period length with the inp
 This code was made in Atmel Studio 7.0
 We're using an ATMEGA32M1
 
-To measure the input we first need an input that generates a pulse. You can use a pulse generator, oscilloscope or in this case an Arduino with a simple code.You require an SPI cable to upload code to the nodes, this takes away the possibility to debug your code. 
+To measure the input we first need an input that generates a pulse. You can use a pulse generator, oscilloscope or in this case an Arduino with a simple code.You require an ISP cable to upload code to the nodes, this takes away the possibility to debug your code. 
 Further more there are not enough pins for an LCD display available. 
 Luckily we have 4 LED’s which we can work with and monitor the state of our code and nodes.
 
  
 ### Installing
 
-Because we are using pin PD4(ICP1A) which is also used for the SPI communication, you must first disconnect the SPI cable before you are able to get any readings from the PD4 pin and vice versa, you must disconnect the input pin before you are able to upload any new codes onto the nodes. Once you have connected the SPI cable, you must also connect your nodes with a 5v power source and a ground. run your code with your programmer(AVR Dragon).
+Because we are using pin PD4(ICP1A) which is also used for the ISP communication, you must first disconnect the ISP cable before you are able to get any readings from the PD4 pin and vice versa, you must disconnect the input pin before you are able to upload any new codes onto the nodes. Once you have connected the ISP cable, you must also connect your nodes with a 5v power source and a ground. run your code with your programmer(AVR Dragon).
 
 ## Running the tests
 
@@ -35,7 +35,7 @@ Monitor the ICF1A flag in TIFR register to see if edge is arrived. Upon the arri
 Prescalar : we are using a 16MHz  microchip, the timer counter used is  16 bit long. Meaning the clock makes 2^16 = 65536 ticks before overflowing. 16 MHz = 6.25^-8 seconds per tick.
 Thus if we set the prescalar to 1, it  takes 65536 * 6.25^-8 = 0.004096 seconds per overflow = 4096 microseconds. Which is more than enough to conduct our tests. Making sure our input pulse does not exceed the amount of time per overflow we can safely test our input capture without the complications with the timer, such as the second edge detection having a smaller value than the first one.
 
-Because we lack an LCD display and are using an SPI cable we can not monitor the exact value of the calculated by our nodes but we are able to freely change and adjust our input pulse length. 
+Because we lack an LCD display and are using an ISP cable we can not monitor the exact value of the calculated by our nodes but we are able to freely change and adjust our input pulse length. 
 This means that we can add conditions to our code and LED’s.
 As soon as the period is longer than 1000 microseconds, turn led1 on.
 As soon as the period is longer than 2000 microseconds, turn led2 on.
