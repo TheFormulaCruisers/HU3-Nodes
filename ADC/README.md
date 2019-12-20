@@ -6,7 +6,7 @@
 
 In order to have a working node, we must first test it.
 In this case each function tasked to the nodes are tested individually and afterwards will be used collectively for the overall code.
-You require an SPI cable in order to upload code to the nodes, this takes away the possibility to debug your code. 
+You require an ISP cable in order to upload code to the nodes, this takes away the possibility to debug your code. 
 Further more there are not enough pins for an LCD display available. 
 Luckily we have 4 LED’s which we can work with and monitor the state of our code and nodes.
 
