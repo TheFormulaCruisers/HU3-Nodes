@@ -4,11 +4,11 @@
 
 int main ( )
 {
-	unsigned int t;
+	unsigned int t;								// create variable integer t
 
-	DDRB = 0xFF;
-	DDRC = 0xFF;	
-	DDRD = (1<<PORTD7) ;	
+	DDRB = 0xFF;								// register ports B as all output
+	DDRC = 0xFF;								// register ports C as all output
+	DDRD = (1<<PORTD7) ;							// register port D7 as output
 	
 	while (1)
 	{
@@ -27,20 +27,20 @@ int main ( )
 
 		
 		if(t < 10000)
-		{							// put period count on PORTA & PORTB
+		{							// turn led 1 on if period is beneath 10000 microseconds
 			PORTC |= (1<<PORTC5);
 		}
 		if(t < 3500)
-		{							// put period count on PORTA & PORTB
+		{							// turn led 2 on if period is beneath 3500 microseconds
 			PORTC |= (1<<PORTC4);
 		}		
 		
 		if(t < 2000)
-		{							// put period count on PORTA & PORTB
+		{							// turn led 3 on if period is beneath 2000 microseconds
 			PORTB |= (1<<PORTB2);
 		}		
 		if(t < 1000)
-		{							// put period count on PORTA & PORTB
+		{							// turn led 4 on if period is beneath 1000 microseconds
 			PORTD |= (1<<PORTD7);
 		}		
 
