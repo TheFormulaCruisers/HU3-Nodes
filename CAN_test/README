@@ -1,0 +1,6 @@
+The CAN_test is a copy of the AT90CAN128 software. for further information got to https://github.com/TheFormulaCruisers/HU3-AT90CAN128 .
+
+### The Atmage32M1
+
+comes shipped from the factory with the wrong clock settings, 
+these need to be changed first before testing the software. Please read the following instructions.
