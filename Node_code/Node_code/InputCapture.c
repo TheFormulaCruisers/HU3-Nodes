@@ -17,21 +17,22 @@
 #include "InputCapture.h"
 #include "CAN.h"
 
-void Input_reading(unsigned int *t)
+void Input_reading(unsigned int *Period)
 {
 	TCCR1A = 0;
 	TIFR1 = (1<<ICF1);							// clear input capture flag
 	TCCR1B = 0x45;								// capture on rising edge
 	
+	//GTCCR |= (1<<ICPSEL1);					// Select ICP1B as trigger for timer 1 input capture
+	
 	while ((TIFR1&(1<<ICF1)) == 0);				// monitor for capture
 	 	
-	*t = ICR1;
+	*Period = ICR1;
 	TIFR1 = (1<<ICF1);							// clear capture flag
 	 	
 	while ((TIFR1 &(1<<ICF1)) == 0);			// monitor for next rising edge capture
 	 	
-	*t = ICR1 - *t; 							// period= recent capture-previous capture
-	
+	*Period = ICR1 - *Period; 					// period= recent capture-previous capture
 	//return t;
  }
 

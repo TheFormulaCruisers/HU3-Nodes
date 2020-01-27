@@ -10,7 +10,7 @@
 #define INPUTCAPTURE_H_
 
 
-void Input_reading(unsigned int *t);
+void Input_reading(unsigned int *Period);
 
 
 #endif /* INPUTCAPTURE_H_ */
