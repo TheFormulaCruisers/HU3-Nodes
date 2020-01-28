@@ -6,11 +6,24 @@ When an error occurs, the node will send an error message to the C3.
 
 ## Getting Started
 
-In order to have a working node, we must tested every function individually and have put them all together. 
+In order to have a working node, we must have tested every function individually and have put them all together. 
 This includes:
 * The CAN_test ( https://github.com/TheFormulaCruisers/HU3-Nodes/tree/master/CAN_test ).
 * The ADC_test ( https://github.com/TheFormulaCruisers/HU3-Nodes/tree/master/ADC_test )
 * The input_Capture_test ( https://github.com/TheFormulaCruisers/HU3-Nodes/tree/master/Input_Capture_test )
+
+
+## Instructions
+* ID.
+In order to upload the code to the node there are 2 tasks that has to be done for every node before uploading the code. that is to change the ID.Each and every Node needs a unique ID. this ID will be used in order to communicate to the C3. The C3 uses this unique ID to give priority to certain nodes. The ID should have a 16 bit value. for further information regarding the CAN-bus and the ID visit 
+* Function.
+Before uploading your code, the nodes needs to be able to know what functions it is doing and what data to send. Therefor the functions are first defined in this code as 
+  * define ADC_Active1.
+  * define ADC_Active2.
+  * define Input_Capture.
+The specification, requirements and the software of the nodes allow a Maximum of 2 functions per node. So before uploading the code make sure which function/s you are using. you can disable a function by commenting out the defined function ( // define ADC_Active2).
+
+## Detailed description
 
 
 ## Built With
