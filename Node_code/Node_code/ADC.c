@@ -21,13 +21,13 @@
 int ADC_reading(unsigned int *ADC2, unsigned int *ADC_data1 , unsigned int *ADC_data2)
 {	
 	
-	ADCSRA |= (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2); 		// Set ADC prescalar to 256 - 125KHz sample rate @ 16MHz
+	ADCSRA |= (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2); 		// Set ADC prescalar to 128 - 125KHz sample rate @ 16MHz
 
 	ADMUX |= (1 << REFS0); 										// Set ADC reference to AVCC
 	ADMUX |= (1 << ADLAR); 										// Left adjust ADC result to allow easy 8 bit reading
 
 
-	ADMUX |= (1<<MUX1) | (1<<MUX2);								//  ADC6 , MUX values needed to be changed to use ADC7
+	ADMUX |= (1<<MUX1) | (1<<MUX2);								// ADC6 , MUX values needed to be changed to use ADC7
 	ADCSRA |= (1 << ADEN);  									// Enable ADC
 	ADCSRA |= (1 << ADSC);  									// Start A2D Conversions
 	*ADC_data1 = ADCH;
@@ -45,11 +45,5 @@ int ADC_reading(unsigned int *ADC2, unsigned int *ADC_data1 , unsigned int *ADC_
 }
 
 
-int Wait(unsigned int *Timer)														// delay for 200 ms between every analog reading
-{	
-	if(*Timer == 0)
-	TCCR0B |= (1<<CS00) | (1<<CS02);
-	return *Timer;
-}
 
 

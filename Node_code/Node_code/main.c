@@ -20,33 +20,35 @@
 #define ADC_ACTIVE2												// Maximum amount of defined functions is 2
 //#define Input_Capture									
 
+volatile unsigned int Overflows = 0;
 
+//___________________________________________________________________________________________________________________________________________________________________________________//
 int main(void)
 {
-	can_init(0);							// Initialize CAN protocol	
+	can_init(0);															// Initialize CAN protocol	
 	
-	unsigned int Period;					// define variables
-	unsigned int ADC_2;
+	unsigned int Period;													// define variables
 	unsigned int ADC_data1;
 	unsigned int ADC_data2;
-	unsigned int Timer;
 	
-	ADC_2 = 0;
-	Timer = 0;
+	unsigned int ADC_2 = 0;
+	uint8_t dat[2] = {0xAA};												// Define amount of bytes in the data package
 	
 	DDRB = 0b00000100 ;														// Define register pins input and output
 	DDRC = 0b00110000 ;
 	DDRD = 0b10000000 ;
 	
-	uint8_t dat[2] = {0xAA};												// Define
+
+	TCCR0B |= (1<<CS00) | (1<<CS02);										// Set 8-bit Timer TCCR0B prescalar to 1024
+	TCNT0 = 0;																// Initialize timer
+		
 	
-	PCMSK0 |= (1<<PCINT0) | (1<<PCINT3);									// Enable interrupt pins for addition to the code
+	PCMSK0 |= (1<<PCINT0) | (1<<PCINT3);									// Enable interrupt pins for additions to the code (spare)
 	PCICR |= (1<<PCIE0);
 	sei();
 	
     while (1) 
     {
-////////////////////////////////////////////////////////////////////////////////
 		#ifdef ADC_ACTIVE1													// check if ADC1(PB5) is active			
 			#ifdef ADC_ACTIVE2												// check if ADC6(PB6) is active						
 				ADC_2 = 1;													// Variable bit to identify if both ADC's are active 1 = both active, 0 = just ADC_ACTIVE1
@@ -61,7 +63,9 @@ int main(void)
 				dat[0] = ADC_data1;
 			#endif	
 		#endif	
-///////////////////////////////////////////////////////////////////////////////
+
+
+
 		#ifdef Input_Capture												// check if Input_capture pin (PD4) is active	
 			Input_reading(&Period);											// call Input_reading function
 			
@@ -77,22 +81,38 @@ int main(void)
 				dat[0] = Period;
 			#endif	
 		#endif 
-////////////////////////////////////////////////////////////////////////////////
-		Wait(&Timer);												
-		if(Timer == 1)														// condition to transmit after interval set in wait function
-			can_transmit(dat, 1);
-			Timer = 0;		
+
 		
-    }
+		if((TCNT0 >= 57) && (Overflows >= 1) || (Overflows >= 2))			// Condition to transmit after interval set in wait function
+			{
+				can_transmit(dat, 1);										// Call CAN transmit function
+				TCNT0 = 0;													// Reset Timer
+				Overflows = 0;												// the timer overflows before reaching 20 milliseconds so we need to count the overflows as well
+								
+			}
+}
 	return 0;
 }
 
-ISR(PCINT0_vect)
+
+
+
+
+//___________________________________________________________________________________________________________________________________________________________________________________________//
+ISR(PCINT0_vect)															// Interrupt for additions to the code (spare)
 {
 
 }
 
-ISR(PCINT3_vect)
+ISR(PCINT3_vect)															// Interrupt for additions to the code (spare)
 {
 	// Your code here
 }
+
+ISR(TIMER0_OVF_vect)															// Interrupt for additions to the code (spare)
+{
+	Overflows ++;// Your code here
+}
+
+
+//_____________________________________________________________________________________________________________________________________________________________________________________________//
