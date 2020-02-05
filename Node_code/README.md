@@ -27,7 +27,10 @@ Before uploading your code, the nodes needs to be able to know what functions it
   * define ADC_Active2.
   * define Input_Capture.
 
-The specification, requirements and the software of the nodes allow a Maximum of 2 functions per node. So before uploading the code make sure which function/s you are using. you can disable a function by commenting out the defined function ( // define ADC_Active2).
+The specification, requirements and the software of the nodes allow a Maximum of 3 ADC functions or a combination of 2 ADC functions and 1 Input capture function per node. So before uploading the code make sure which function/s you are using. you can disable a function by commenting out the defined function ( // define ADC_Active2).
+
+## Additions
+in addition to the current code, some nodes require the C3 to send data to the node. this can easily be added to the code with the Addition of a function. The CAN headers have already functions ready for data transmission to and from the C3.
 
 ## Detailed description
 For the detailed description visit https://betafactory.atlassian.net/wiki/spaces/FCHU3/pages/1503363671/7.3.2.6+WOC+-+Nodes for the code flow. further more the code has been commented for a step by step walkthrough.
